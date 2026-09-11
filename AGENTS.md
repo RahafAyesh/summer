@@ -83,3 +83,7 @@
 -laravel 
 -Inertia (laravel svelte template)
 -TailwindCSS
+
+
+# design system 
+Read DESIGN.md file 
