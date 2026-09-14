@@ -85,8 +85,8 @@
             <!-- Mobile Menu -->
             <div class="lg:hidden">
                 <Sheet>
-                    <SheetTrigger asChild>
-                        {#snippet children(props)}
+                    <SheetTrigger>
+                        {#snippet child({ props })}
                             <Button
                                 variant="ghost"
                                 size="icon"
@@ -229,8 +229,8 @@
                 </div>
 
                 <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        {#snippet children(props)}
+                    <DropdownMenuTrigger>
+                        {#snippet child({ props })}
                             <Button
                                 variant="ghost"
                                 size="icon"

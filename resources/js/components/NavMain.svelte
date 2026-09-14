@@ -6,6 +6,7 @@
         SidebarMenu,
         SidebarMenuButton,
         SidebarMenuItem,
+        useSidebar,
     } from '@/components/ui/sidebar';
     import { currentUrlState } from '@/lib/currentUrl.svelte';
     import { toUrl } from '@/lib/utils';
@@ -18,23 +19,30 @@
     } = $props();
 
     const url = currentUrlState();
+    const sidebar = useSidebar();
+
+    function handleNavClick() {
+        if (sidebar.isMobile) {
+            sidebar.setOpenMobile(false);
+        }
+    }
 </script>
 
 <SidebarGroup class="px-2 py-0">
-    <SidebarGroupLabel>Platform</SidebarGroupLabel>
+    <SidebarGroupLabel>القائمة</SidebarGroupLabel>
     <SidebarMenu>
         {#each items as item (toUrl(item.href))}
             <SidebarMenuItem>
                 <SidebarMenuButton
-                    asChild
                     isActive={url.isCurrentUrl(item.href, url.currentUrl)}
-                    tooltip={item.title}
+                    tooltipContent={item.title}
                 >
-                    {#snippet children(props)}
+                    {#snippet child({ props })}
                         <Link
                             {...props}
                             href={toUrl(item.href)}
                             class={props.class}
+                            onclick={handleNavClick}
                         >
                             {#if item.icon}
                                 <item.icon class="size-4 shrink-0" />

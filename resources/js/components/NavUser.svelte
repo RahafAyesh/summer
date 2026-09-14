@@ -16,15 +16,15 @@
     import UserMenuContent from '@/components/UserMenuContent.svelte';
 
     const user = $derived(page.props.auth.user);
-    const { isMobile, state: sidebarState } = useSidebar();
+    const sidebar = useSidebar();
 </script>
 
 {#if user}
     <SidebarMenu>
         <SidebarMenuItem>
             <DropdownMenu class="w-full">
-                <DropdownMenuTrigger asChild>
-                    {#snippet children(props)}
+                <DropdownMenuTrigger>
+                    {#snippet child({ props })}
                         <SidebarMenuButton
                             size="lg"
                             class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
@@ -40,7 +40,7 @@
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
                     class="w-full min-w-0 rounded-lg"
-                    side={$sidebarState === 'collapsed' && !$isMobile
+                    side={sidebar.state === 'collapsed' && !sidebar.isMobile
                         ? 'left'
                         : 'top'}
                     align="end"

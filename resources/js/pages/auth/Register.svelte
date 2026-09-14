@@ -1,7 +1,7 @@
 <script module lang="ts">
     export const layout = {
-        title: 'Create an account',
-        description: 'Enter your details below to create your account',
+        title: 'إنشاء حساب جديد',
+        description: 'أدخل بياناتك لإنشاء حساب جديد',
     };
 </script>
 
@@ -21,7 +21,7 @@
     let { passwordRules }: { passwordRules: string } = $props();
 </script>
 
-<AppHead title="Register" />
+<AppHead title="إنشاء حساب" />
 
 <Form
     {...store.form()}
@@ -29,22 +29,23 @@
     class="flex flex-col gap-6"
 >
     {#snippet children({ errors, processing })}
-        <div class="grid gap-6">
+        <div class="grid gap-5">
             <div class="grid gap-2">
-                <Label for="name">Name</Label>
+                <Label for="name" class="font-label text-xs">الاسم الكامل</Label>
                 <Input
                     id="name"
                     type="text"
                     required
                     autocomplete="name"
                     name="name"
-                    placeholder="Full name"
+                    placeholder="الاسم الكامل"
+                    class="h-11 rounded-full border-border bg-background px-5"
                 />
                 <InputError message={errors.name} />
             </div>
 
             <div class="grid gap-2">
-                <Label for="email">Email address</Label>
+                <Label for="email" class="font-label text-xs">البريد الإلكتروني</Label>
                 <Input
                     id="email"
                     type="email"
@@ -52,51 +53,54 @@
                     autocomplete="email"
                     name="email"
                     placeholder="email@example.com"
+                    class="h-11 rounded-full border-border bg-background px-5"
                 />
                 <InputError message={errors.email} />
             </div>
 
             <div class="grid gap-2">
-                <Label for="password">Password</Label>
+                <Label for="password" class="font-label text-xs">كلمة المرور</Label>
                 <PasswordInput
                     id="password"
                     required
                     autocomplete="new-password"
                     name="password"
-                    placeholder="Password"
+                    placeholder="كلمة المرور"
                     passwordrules={passwordRules}
+                    class="h-11 rounded-full border-border bg-background px-5"
                 />
                 <InputError message={errors.password} />
             </div>
 
             <div class="grid gap-2">
-                <Label for="password_confirmation">Confirm password</Label>
+                <Label for="password_confirmation" class="font-label text-xs">تأكيد كلمة المرور</Label>
                 <PasswordInput
                     id="password_confirmation"
                     required
                     autocomplete="new-password"
                     name="password_confirmation"
-                    placeholder="Confirm password"
+                    placeholder="تأكيد كلمة المرور"
                     passwordrules={passwordRules}
+                    class="h-11 rounded-full border-border bg-background px-5"
                 />
                 <InputError message={errors.password_confirmation} />
             </div>
 
             <Button
                 type="submit"
-                class="mt-2 w-full"
+                class="mt-2 h-11 w-full rounded-full bg-foreground font-label text-xs text-background hover:bg-foreground/90"
                 disabled={processing}
                 data-test="register-user-button"
             >
                 {#if processing}<Spinner />{/if}
-                Create account
+                إنشاء حساب
             </Button>
         </div>
 
         <div class="text-center text-sm text-muted-foreground">
-            Already have an account?
-            <TextLink href={login()} class="underline underline-offset-4">
-                Log in
+            لديك حساب بالفعل؟
+            <TextLink href={login()} class="font-label text-xs">
+                تسجيل الدخول
             </TextLink>
         </div>
     {/snippet}

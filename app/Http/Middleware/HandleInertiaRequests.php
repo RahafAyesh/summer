@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\ExpenseCategory;
+use App\Enums\IncomeCategory;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -42,6 +44,14 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'flash' => [
+                'success' => $request->session()->get('success'),
+                'error' => $request->session()->get('error'),
+            ],
+            'categories' => [
+                'expenses' => ExpenseCategory::toArray(),
+                'incomes' => IncomeCategory::toArray(),
+            ],
         ];
     }
 }

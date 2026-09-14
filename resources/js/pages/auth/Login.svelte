@@ -1,7 +1,7 @@
 <script module lang="ts">
     export const layout = {
-        title: 'Log in to your account',
-        description: 'Enter your email and password below to log in',
+        title: 'تسجيل الدخول',
+        description: 'أدخل بريدك الإلكتروني وكلمة المرور لتسجيل الدخول',
     };
 </script>
 
@@ -30,10 +30,10 @@
     } = $props();
 </script>
 
-<AppHead title="Log in" />
+<AppHead title="تسجيل الدخول" />
 
 {#if status}
-    <div class="mb-4 text-center text-sm font-medium text-green-600">
+    <div class="mb-4 rounded-lg bg-mint/20 p-3 text-center text-sm font-medium text-foreground">
         {status}
     </div>
 {/if}
@@ -46,9 +46,9 @@
     class="flex flex-col gap-6"
 >
     {#snippet children({ errors, processing })}
-        <div class="grid gap-6">
+        <div class="grid gap-5">
             <div class="grid gap-2">
-                <Label for="email">Email address</Label>
+                <Label for="email" class="font-label text-xs">البريد الإلكتروني</Label>
                 <Input
                     id="email"
                     type="email"
@@ -56,16 +56,17 @@
                     required
                     autocomplete="email"
                     placeholder="email@example.com"
+                    class="h-11 rounded-full border-border bg-background px-5"
                 />
                 <InputError message={errors.email} />
             </div>
 
             <div class="grid gap-2">
                 <div class="flex items-center justify-between">
-                    <Label for="password">Password</Label>
+                    <Label for="password" class="font-label text-xs">كلمة المرور</Label>
                     {#if canResetPassword}
-                        <TextLink href={request()} class="text-sm">
-                            Forgot your password?
+                        <TextLink href={request()} class="font-label text-xs">
+                            نسيت كلمة المرور؟
                         </TextLink>
                     {/if}
                 </div>
@@ -74,32 +75,33 @@
                     name="password"
                     required
                     autocomplete="current-password"
-                    placeholder="Password"
+                    placeholder="كلمة المرور"
+                    class="h-11 rounded-full border-border bg-background px-5"
                 />
                 <InputError message={errors.password} />
             </div>
 
-            <div class="flex items-center justify-between">
-                <Label for="remember" class="flex items-center space-x-3">
-                    <Checkbox id="remember" name="remember" />
-                    <span>Remember me</span>
+            <div class="flex items-center gap-2">
+                <Checkbox id="remember" name="remember" />
+                <Label for="remember" class="text-sm font-normal">
+                    تذكرني
                 </Label>
             </div>
 
             <Button
                 type="submit"
-                class="mt-4 w-full"
+                class="mt-2 h-11 w-full rounded-full bg-foreground font-label text-xs text-background hover:bg-foreground/90"
                 disabled={processing}
                 data-test="login-button"
             >
                 {#if processing}<Spinner />{/if}
-                Log in
+                تسجيل الدخول
             </Button>
         </div>
 
         <div class="text-center text-sm text-muted-foreground">
-            Don't have an account?
-            <TextLink href={register()}>Sign up</TextLink>
+            ليس لديك حساب؟
+            <TextLink href={register()} class="font-label text-xs">إنشاء حساب</TextLink>
         </div>
     {/snippet}
 </Form>

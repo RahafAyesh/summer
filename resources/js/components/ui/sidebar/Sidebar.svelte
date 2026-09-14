@@ -28,18 +28,20 @@
 			"flex h-full w-(--sidebar-width) flex-col bg-sidebar text-sidebar-foreground",
 			className
 		)}
+		dir="rtl"
 		bind:this={ref}
 		{...restProps}
 	>
 		{@render children?.()}
 	</div>
 {:else if sidebar.isMobile}
-	<Sheet.Root bind:open={() => sidebar.openMobile, (v) => sidebar.setOpenMobile(v)} {...restProps}>
+	<Sheet.Root open={sidebar.openMobile} onopenchange={(e) => sidebar.setOpenMobile(e.detail.open)} {...restProps}>
 		<Sheet.Content
 			bind:ref
 			data-sidebar="sidebar"
 			data-slot="sidebar"
 			data-mobile="true"
+			dir="rtl"
 			class={cn(
 				"w-(--sidebar-width) bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden",
 				className
@@ -70,9 +72,8 @@
 		<div
 			data-slot="sidebar-gap"
 			class={cn(
-				"transition-[width] duration-200 ease-linear relative w-(--sidebar-width) bg-transparent",
+				"transition-[width] duration-200 ease-linear relative w-(--sidebar-width) shrink-0 bg-transparent",
 				"group-data-[collapsible=offcanvas]:w-0",
-				"group-data-[side=right]:rotate-180",
 				variant === "floating" || variant === "inset"
 					? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_(--spacing(4)))]"
 					: "group-data-[collapsible=icon]:w-(--sidebar-width-icon)"
@@ -81,6 +82,7 @@
 		<div
 			data-slot="sidebar-container"
 			data-side={side}
+			dir="rtl"
 			class={cn(
 				"fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear data-[side=left]:start-0 data-[side=left]:group-data-[collapsible=offcanvas]:start-[calc(var(--sidebar-width)_*_-1)] data-[side=right]:end-0 data-[side=right]:group-data-[collapsible=offcanvas]:end-[calc(var(--sidebar-width)_*_-1)] md:flex",
 				// Adjust the padding for floating and inset variants.
